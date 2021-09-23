@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textFirstChar"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/a"
+        android:textColor="@color/colorTextIcons"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="@dimen/_16ssp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:background="@drawable/background_user_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="#A39D9D"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textFirstChar" />
+
+    <TextView
+        android:id="@+id/textUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:includeFontPadding="false"
+        android:text="@string/muhammad"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintEnd_toStartOf="@+id/phoneIm"
+        app:layout_constraintStart_toEndOf="@+id/textFirstChar"
+        app:layout_constraintTop_toTopOf="@+id/textFirstChar" />
+
+    <TextView
+        android:id="@+id/textLastName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/ubuntu_regular"
+        android:includeFontPadding="false"
+        android:text="@string/muhammad"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toStartOf="@+id/phoneIm"
+        app:layout_constraintStart_toStartOf="@+id/textUserName"
+        app:layout_constraintTop_toBottomOf="@+id/textUserName" />
+
+    <ImageView
+        android:id="@+id/videoCam"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_video" />
+
+    <ImageView
+        android:id="@+id/phoneIm"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="@+id/videoCam"
+        app:layout_constraintEnd_toStartOf="@+id/videoCam"
+        app:layout_constraintTop_toTopOf="@+id/videoCam"
+        app:srcCompat="@drawable/ic_phone" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

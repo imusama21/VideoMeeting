@@ -56,12 +56,16 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.4.1'
 
     //Retrofit & Gson
-    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'
     implementation 'com.google.firebase:firebase-firestore:23.0.3'
+    implementation 'com.google.firebase:firebase-messaging:20.2.3'
+
+    //Swipe Refresh Layout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //Progress Bar
     implementation 'com.kaopiz:kprogresshud:1.2.0'

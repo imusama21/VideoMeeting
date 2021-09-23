@@ -13,8 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VideoMeeting">
         <activity
+            android:name=".activities.OutgoingInvitationActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.IncomingInvtationActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".activities.HomeScreenActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SignUpActivity"
             android:exported="true"

@@ -17,4 +17,11 @@
     <string name="doe">Doe</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="john">John</string>
+    <string name="sign_out">Sign out</string>
+    <string name="muhammad_usama">Muhammad Usama</string>
+    <string name="muhammad">Muhammad</string>
+    <string name="no_user_available">No user available</string>
+    <string name="a">A</string>
+    <string name="incoming_meeting_invitation">Incoming meeting invitation</string>
+    <string name="sending_meeting_invitation">Sending meeting invitation</string>
 </resources>

@@ -31,5 +31,10 @@ public class PreferenceManager {
         return sharedPreferences.getString(key,null);
     }
 
+    public void clearPreferences(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 
 }

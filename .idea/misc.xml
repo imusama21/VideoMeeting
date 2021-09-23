@@ -3,10 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Java/Video Meeting/app/src/main/res/drawable/background_accept_invitation.xml" value="0.19054054054054054" />
+        <entry key="..\:/Android Java/Video Meeting/app/src/main/res/drawable/background_meeting_invitation.xml" value="0.19054054054054054" />
+        <entry key="..\:/Android Java/Video Meeting/app/src/main/res/drawable/background_meeting_invitation_user_icon.xml" value="0.19054054054054054" />
+        <entry key="..\:/Android Java/Video Meeting/app/src/main/res/drawable/background_reject_invitation.xml" value="0.19054054054054054" />
+        <entry key="..\:/Android Java/Video Meeting/app/src/main/res/drawable/background_user_icon.xml" value="0.19054054054054054" />
+        <entry key="..\:/Android Java/Video Meeting/app/src/main/res/drawable/ic_phone.xml" value="0.19054054054054054" />
+        <entry key="..\:/Android Java/Video Meeting/app/src/main/res/drawable/ic_video.xml" value="0.19054054054054054" />
         <entry key="..\:/Android Java/Video Meeting/app/src/main/res/layout/activity_home_screen.xml" value="0.16441441441441443" />
+        <entry key="..\:/Android Java/Video Meeting/app/src/main/res/layout/activity_incoming_invtation.xml" value="0.17657657657657658" />
         <entry key="..\:/Android Java/Video Meeting/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Android Java/Video Meeting/app/src/main/res/layout/activity_outgoing_invitation.xml" value="0.17657657657657658" />
         <entry key="..\:/Android Java/Video Meeting/app/src/main/res/layout/activity_sign_in.xml" value="0.1" />
         <entry key="..\:/Android Java/Video Meeting/app/src/main/res/layout/activity_sign_up.xml" value="0.15" />
+        <entry key="..\:/Android Java/Video Meeting/app/src/main/res/layout/item_container_user.xml" value="0.17657657657657658" />
       </map>
     </option>
   </component>
