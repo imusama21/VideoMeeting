@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -17,11 +18,13 @@ import com.example.videomeeting.listeners.UserListeners;
 import com.example.videomeeting.model.User;
 import com.example.videomeeting.utilities.Constants;
 import com.example.videomeeting.utilities.PreferenceManager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,12 +78,20 @@ public class HomeScreenActivity extends AppCompatActivity implements UserListene
                 preferenceManager.getString(Constants.KEY_LAST_NAME)));
 
         //Token
-        FirebaseInstanceId.getInstance().getInstanceId()
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (task.isSuccessful() && task.getResult() != null) {
+                    sendFCMTokenToDatabase(task.getResult());
+                }
+            }
+        });
+        /*FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
                         sendFCMTokenToDatabase(task.getResult().getToken());
                     }
-                });
+                });*/
 
         userAdapter = new UserAdapter(userList, this);
         homeRecyclerView.setAdapter(userAdapter);

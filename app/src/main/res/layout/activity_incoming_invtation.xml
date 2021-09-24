@@ -76,7 +76,7 @@
             android:includeFontPadding="false"
             android:text="@string/muhammad"
             android:textColor="@color/colorTextIcons"
-            android:textSize="@dimen/_11ssp" />
+            android:textSize="@dimen/_14ssp" />
 
 
     </LinearLayout>
