@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,8 +19,6 @@ import com.example.videomeeting.network.ApiClient;
 import com.example.videomeeting.network.ApiService;
 import com.example.videomeeting.utilities.Constants;
 import com.example.videomeeting.utilities.PreferenceManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.jitsi.meet.sdk.JitsiMeetActivity;
@@ -79,14 +76,11 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
             textUserName.setText(user.firstName);
             textEmail.setText(user.lastName);
         }
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if (task.isSuccessful() && task.getResult() != null) {
-                    invitationToken = task.getResult();
-                    if (meetingType != null && user != null) {
-                        initiateMeeting(meetingType, user.token);
-                    }
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                invitationToken = task.getResult();
+                if (meetingType != null && user != null) {
+                    initiateMeeting(meetingType, user.token);
                 }
             }
         });
@@ -94,12 +88,9 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        imageRejectInvitation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (user != null) {
-                    cancelInvitation(user.token);
-                }
+        imageRejectInvitation.setOnClickListener(view -> {
+            if (user != null) {
+                cancelInvitation(user.token);
             }
         });
     }
@@ -139,7 +130,7 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
                 Constants.getRemoteMessageHeaders(), remoteMessageBody)
                 .enqueue(new Callback<String>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                         if (response.isSuccessful()) {
                             if (type.equals(Constants.REMOTE_MSG_INVITATION)) {
                                 try {
@@ -168,7 +159,7 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                         Toast.makeText(OutgoingInvitationActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -198,7 +189,7 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
         }
     }
 
-    private BroadcastReceiver invitationResponseReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver invitationResponseReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String type = intent.getStringExtra(Constants.REMOTE_MSG_INVITATION_RESPONSE);

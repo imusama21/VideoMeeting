@@ -5,11 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -32,7 +32,7 @@ import retrofit2.Response;
 public class IncomingInvtationActivity extends AppCompatActivity {
 
     private ImageView imageMeetingType, imageAcceptInvitation, imageRejectInvitation;
-    private TextView textIncomingMeetingInvitation, textFirstChar, textUserName, textEmail;
+    private TextView textFirstChar, textUserName, textEmail;
     private String meetingType;
 
     @Override
@@ -49,7 +49,6 @@ public class IncomingInvtationActivity extends AppCompatActivity {
         imageMeetingType = findViewById(R.id.imageMeetingType);
         imageAcceptInvitation = findViewById(R.id.imageAcceptInvitation);
         imageRejectInvitation = findViewById(R.id.imageRejectInvitation);
-        textIncomingMeetingInvitation = findViewById(R.id.textIncomingMeetingInvitation);
         textFirstChar = findViewById(R.id.textFirstChar);
         textUserName = findViewById(R.id.textUserName);
         textEmail = findViewById(R.id.textEmail);
@@ -74,21 +73,11 @@ public class IncomingInvtationActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        imageAcceptInvitation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendInvitationResponse(Constants.REMOTE_MSG_INVITATION_ACCEPTED,
-                        getIntent().getStringExtra(Constants.REMOTE_MSG_INVITER_TOKEN));
-            }
-        });
+        imageAcceptInvitation.setOnClickListener(view -> sendInvitationResponse(Constants.REMOTE_MSG_INVITATION_ACCEPTED,
+                getIntent().getStringExtra(Constants.REMOTE_MSG_INVITER_TOKEN)));
 
-        imageRejectInvitation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendInvitationResponse(Constants.REMOTE_MSG_INVITATION_REJECTED,
-                        getIntent().getStringExtra(Constants.REMOTE_MSG_INVITER_TOKEN));
-            }
-        });
+        imageRejectInvitation.setOnClickListener(view -> sendInvitationResponse(Constants.REMOTE_MSG_INVITATION_REJECTED,
+                getIntent().getStringExtra(Constants.REMOTE_MSG_INVITER_TOKEN)));
     }
 
     private void sendInvitationResponse(String type, String receiverToken) {
@@ -119,7 +108,7 @@ public class IncomingInvtationActivity extends AppCompatActivity {
                 Constants.getRemoteMessageHeaders(), remoteMessageBody)
                 .enqueue(new Callback<String>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                         if (response.isSuccessful()) {
                             if (type.equals(Constants.REMOTE_MSG_INVITATION_ACCEPTED)) {
                                 try {
@@ -149,14 +138,14 @@ public class IncomingInvtationActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                         Toast.makeText(IncomingInvtationActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });
     }
 
-    private BroadcastReceiver invitationResponseReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver invitationResponseReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String type = intent.getStringExtra(Constants.REMOTE_MSG_INVITATION_RESPONSE);

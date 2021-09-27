@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -18,8 +17,6 @@ import com.example.videomeeting.listeners.UserListeners;
 import com.example.videomeeting.model.User;
 import com.example.videomeeting.utilities.Constants;
 import com.example.videomeeting.utilities.PreferenceManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,7 +32,6 @@ public class HomeScreenActivity extends AppCompatActivity implements UserListene
     private TextView title, signOut, errorMessage;
     private RecyclerView homeRecyclerView;
     private PreferenceManager preferenceManager;
-    //private KProgressHUD progress;
     private List<User> userList;
     private UserAdapter userAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -64,34 +60,17 @@ public class HomeScreenActivity extends AppCompatActivity implements UserListene
         preferenceManager = new PreferenceManager(getApplicationContext());
         userList = new ArrayList<>();
 
-        //Progress Bar
-        /*progress = KProgressHUD.create(HomeScreenActivity.this)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel("Please wait...")
-                .setCancellable(true)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f);*/
-
         //Set title
         title.setText(String.format("%s %s",
                 preferenceManager.getString(Constants.KEY_FIRST_NAME),
                 preferenceManager.getString(Constants.KEY_LAST_NAME)));
 
         //Token
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if (task.isSuccessful() && task.getResult() != null) {
-                    sendFCMTokenToDatabase(task.getResult());
-                }
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                sendFCMTokenToDatabase(task.getResult());
             }
         });
-        /*FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        sendFCMTokenToDatabase(task.getResult().getToken());
-                    }
-                });*/
 
         userAdapter = new UserAdapter(userList, this);
         homeRecyclerView.setAdapter(userAdapter);
