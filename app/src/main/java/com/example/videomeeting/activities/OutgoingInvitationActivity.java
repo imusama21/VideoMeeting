@@ -99,24 +99,18 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
         try {
             JSONArray tokens = new JSONArray();
             tokens.put(receiverToken);
-
             JSONObject body = new JSONObject();
             JSONObject data = new JSONObject();
-
             data.put(Constants.REMOTE_MSG_TYPE, Constants.REMOTE_MSG_INVITATION);
             data.put(Constants.REMOTE_MSG_MEETING_TYPE, meetingType);
             data.put(Constants.KEY_FIRST_NAME, preferenceManager.getString(Constants.KEY_FIRST_NAME));
             data.put(Constants.KEY_LAST_NAME, preferenceManager.getString(Constants.KEY_LAST_NAME));
             data.put(Constants.KEY_EMAIL, preferenceManager.getString(Constants.KEY_EMAIL));
             data.put(Constants.REMOTE_MSG_INVITER_TOKEN, invitationToken);
-
             meetingRoom = preferenceManager.getString(Constants.KEY_USER_ID) + "_" + UUID.randomUUID().toString().substring(0, 5);
             data.put(Constants.REMOTE_MSG_MEETING_ROOM, meetingRoom);
-
-
             body.put(Constants.REMOTE_MSG_DATA, data);
             body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens);
-
             sendRemoteMessage(body.toString(), Constants.REMOTE_MSG_INVITATION);
 
         } catch (Exception exception) {
@@ -157,7 +151,6 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
                             finish();
                         }
                     }
-
                     @Override
                     public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                         Toast.makeText(OutgoingInvitationActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -170,19 +163,13 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
         try {
             JSONArray tokens = new JSONArray();
             tokens.put(receiverToken);
-
             JSONObject body = new JSONObject();
             JSONObject data = new JSONObject();
-
             data.put(Constants.REMOTE_MSG_TYPE, Constants.REMOTE_MSG_INVITATION_RESPONSE);
             data.put(Constants.REMOTE_MSG_INVITATION_RESPONSE, Constants.REMOTE_MSG_INVITATION_CANCELLED);
-
             body.put(Constants.REMOTE_MSG_DATA, data);
             body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens);
-
             sendRemoteMessage(body.toString(), Constants.REMOTE_MSG_INVITATION_RESPONSE);
-
-
         } catch (Exception exception) {
             Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
             finish();
@@ -219,6 +206,5 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(
                 invitationResponseReceiver
         );
-
     }
 }

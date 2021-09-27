@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
             new Handler().postDelayed(() -> {
                 startActivity(new Intent(MainActivity.this, SignInActivity.class));
                 finish();
-            }, 2000);
+            }, 1500);
         }
     }
 }

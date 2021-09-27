@@ -40,11 +40,9 @@ public class HomeScreenActivity extends AppCompatActivity implements UserListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
         bindViews();
         setData();
         setListener();
-
     }
 
     private void bindViews() {
@@ -59,24 +57,19 @@ public class HomeScreenActivity extends AppCompatActivity implements UserListene
         //Initializations
         preferenceManager = new PreferenceManager(getApplicationContext());
         userList = new ArrayList<>();
-
         //Set title
         title.setText(String.format("%s %s",
                 preferenceManager.getString(Constants.KEY_FIRST_NAME),
                 preferenceManager.getString(Constants.KEY_LAST_NAME)));
-
         //Token
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 sendFCMTokenToDatabase(task.getResult());
             }
         });
-
         userAdapter = new UserAdapter(userList, this);
         homeRecyclerView.setAdapter(userAdapter);
-
         swipeRefreshLayout.setOnRefreshListener(this::getUser);
-
         getUser();
     }
 
@@ -116,12 +109,10 @@ public class HomeScreenActivity extends AppCompatActivity implements UserListene
     @SuppressLint("NotifyDataSetChanged")
     private void getUser() {
         swipeRefreshLayout.setRefreshing(true);
-        //progress.show();
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_USERS).get()
                 .addOnCompleteListener(task -> {
                     swipeRefreshLayout.setRefreshing(false);
-                    //progress.dismiss();
                     String myUserId = preferenceManager.getString(Constants.KEY_USER_ID);
                     if (task.isSuccessful() && task.getResult() != null) {
                         userList.clear();
@@ -142,14 +133,12 @@ public class HomeScreenActivity extends AppCompatActivity implements UserListene
                             errorMessage.setVisibility(View.VISIBLE);
                         }
                     } else {
-                        //progress.dismiss();
                         swipeRefreshLayout.setRefreshing(false);
                         errorMessage.setVisibility(View.VISIBLE);
                     }
                 })
                 .addOnFailureListener(e -> {
                     swipeRefreshLayout.setRefreshing(false);
-                    //progress.dismiss();
                     Toast.makeText(HomeScreenActivity.this, "Unable to load user: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }

@@ -44,7 +44,6 @@ public class IncomingInvtationActivity extends AppCompatActivity {
         setListeners();
     }
 
-
     private void bindViews() {
         imageMeetingType = findViewById(R.id.imageMeetingType);
         imageAcceptInvitation = findViewById(R.id.imageAcceptInvitation);
@@ -84,19 +83,13 @@ public class IncomingInvtationActivity extends AppCompatActivity {
         try {
             JSONArray tokens = new JSONArray();
             tokens.put(receiverToken);
-
             JSONObject body = new JSONObject();
             JSONObject data = new JSONObject();
-
             data.put(Constants.REMOTE_MSG_TYPE, Constants.REMOTE_MSG_INVITATION_RESPONSE);
             data.put(Constants.REMOTE_MSG_INVITATION_RESPONSE, type);
-
             body.put(Constants.REMOTE_MSG_DATA, data);
             body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens);
-
             sendRemoteMessage(body.toString(), type);
-
-
         } catch (Exception exception) {
             Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
             finish();
@@ -173,6 +166,5 @@ public class IncomingInvtationActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(
                 invitationResponseReceiver
         );
-
     }
 }

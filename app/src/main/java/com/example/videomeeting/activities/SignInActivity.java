@@ -28,7 +28,6 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
         bindViews();
         setData();
         setListener();
@@ -55,10 +54,8 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void setListener() {
-
         //Button Sign In
         btnSignIn.setOnClickListener(view -> validateData());
-
         //Sign Up Text
         signUpText.setOnClickListener(view -> startActivity(new Intent(SignInActivity.this, SignUpActivity.class)));
     }

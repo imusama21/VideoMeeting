@@ -63,9 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void setListener() {
         back.setOnClickListener(view -> onBackPressed());
-
         btnSignUp.setOnClickListener(view -> validateData());
-
         signInText.setOnClickListener(view -> onBackPressed());
     }
 
