@@ -12,7 +12,8 @@
         android:usesCleartextTraffic="true"
         android:roundIcon="@drawable/video_call"
         android:supportsRtl="true"
-        android:theme="@style/Theme.VideoMeeting">
+        android:theme="@style/Theme.VideoMeeting"
+        tools:ignore="AllowBackup,UnusedAttribute">
         <activity
             android:name=".activities.OutgoingInvitationActivity"
             android:screenOrientation="portrait"
