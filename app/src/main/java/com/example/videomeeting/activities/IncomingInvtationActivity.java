@@ -124,12 +124,14 @@ public class IncomingInvtationActivity extends AppCompatActivity {
                             if (type.equals(Constants.REMOTE_MSG_INVITATION_ACCEPTED)) {
                                 try {
                                     URL serverUrl = new URL("https://meet.jit.si");
-                                    JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
-                                            .setServerURL(serverUrl)
-                                            .setWelcomePageEnabled(false)
-                                            .setRoom(getIntent().getStringExtra(Constants.REMOTE_MSG_MEETING_ROOM))
-                                            .build();
-                                    JitsiMeetActivity.launch(IncomingInvtationActivity.this, options);
+                                    JitsiMeetConferenceOptions.Builder builder = new JitsiMeetConferenceOptions.Builder();
+                                    builder.setServerURL(serverUrl);
+                                    builder.setWelcomePageEnabled(false);
+                                    builder.setRoom(getIntent().getStringExtra(Constants.REMOTE_MSG_MEETING_ROOM));
+                                    if (meetingType.equals("audio")) {
+                                        builder.setVideoMuted(true);
+                                    }
+                                    JitsiMeetActivity.launch(IncomingInvtationActivity.this, builder.build());
                                     finish();
                                 } catch (Exception exception) {
                                     Toast.makeText(IncomingInvtationActivity.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
